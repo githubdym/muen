@@ -1,10 +1,14 @@
 import React from 'react';
-import Home from './Home';
-
+import 'antd/dist/antd.css';
+import {BrowserRouter} from "react-router-dom"
+import RouterView from "./router/routerview"
+import routers from "./router/routerconfig"
 function App() {
   return (
     <div className="App">
-        <Home></Home>
+        <BrowserRouter>
+            <RouterView routers={routers}></RouterView>
+        </BrowserRouter>   
     </div>
   );
 }
