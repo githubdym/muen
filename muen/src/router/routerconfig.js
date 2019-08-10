@@ -20,12 +20,19 @@ const Register = Loadable({
     loader: () => import('../views/register'),
     loading: Loading,
 });
+const Login = Loadable({
+    loader: () => import('../views/login'),
+    loading: Loading,
+});
 function Loading() {
     return <div> loading ...</div>
 }
 const routers = [{
-    path:'/',
+    path:'/register',
     component:Register
+},{
+    path:'/login',
+    component:Login
 },{
     path: "/home",
     component: Home,

@@ -233,19 +233,26 @@ import '../css/register.css'
             )}
           </Form.Item>
           <Form.Item {...tailFormItemLayout}>
-            <Button type="primary" htmlType="submit">
-              Register
+            <Button type="primary" htmlType="submit"
+            onClick={()=>{
+                let{ userName,password,realName}=this.state;
+                 axios.post('/register',{realName,userName,password,userType:3})
+                   .then(res => {
+                       if(res.data.code===1){
+            
+                         this.props.history.push('/login')
+                       }
+                   });
+            }}
+            >
+             注册
             </Button>
           </Form.Item>
         </Form>
       );
     }
     componentDidMount() {
-      let{ userName,password,realName}=this.state;
-      axios.post('/register',{realName,userName,password})
-        .then(res => {
-            console.log(res)
-        });
+    
     }
     componentDidUpdate(){
     
