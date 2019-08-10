@@ -1,0 +1,10 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ant-form {
+  width: 500px;
+  margin: 50px auto;
+}

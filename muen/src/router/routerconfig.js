@@ -16,10 +16,17 @@ const UserProte = Loadable({
     loader: () => import('../views/userprotel'),
     loading: Loading,
 });
+const Register = Loadable({
+    loader: () => import('../views/register'),
+    loading: Loading,
+});
 function Loading() {
     return <div> loading ...</div>
 }
 const routers = [{
+    path:'/',
+    component:Register
+},{
     path: "/home",
     component: Home,
     children: [
