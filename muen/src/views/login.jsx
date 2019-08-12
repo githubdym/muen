@@ -1,5 +1,5 @@
 import React  from 'react'
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input, Button, Checkbox,Row,Col} from 'antd';
 import axios from 'axios';
 import '../css/login.css'
 class NormalLoginForm extends React.Component {
@@ -20,6 +20,8 @@ class NormalLoginForm extends React.Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
+        <Row>
+        <Col span={8} offset={8}>
         <Form.Item>
           {getFieldDecorator('username', {
             rules: [{ required: true, message: '请输入您的用户名!' }],
@@ -35,6 +37,10 @@ class NormalLoginForm extends React.Component {
             />,
           )}
         </Form.Item>
+         </Col>
+          </Row>
+          <Row>
+            <Col span={8} offset={8}>
         <Form.Item>
           {getFieldDecorator('password', {
             rules: [{ required: true, message: '请输入您的密码!' }],
@@ -52,6 +58,10 @@ class NormalLoginForm extends React.Component {
             />,
           )}
         </Form.Item>
+        </Col>
+          </Row>
+          <Row>
+            <Col span={8} offset={8}>
         <Form.Item>
           {getFieldDecorator('remember', {
             valuePropName: 'checked',
@@ -80,6 +90,8 @@ class NormalLoginForm extends React.Component {
               this.props.history.push('/register')
           }}>register now!</span>
         </Form.Item>
+        </Col>
+          </Row>
       </Form>
     );
   }

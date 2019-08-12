@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu, Icon} from 'antd';
+import { Menu, Icon,} from 'antd';
 import RouterView from "./router/routerview"
 import "./css/home.css"
 import Header from './components/header'
@@ -15,20 +15,22 @@ export default class Home extends Component {
     }
     render() {
         return (
+        <div>   
+            <Header />  
             <div className="home">
-                {/* <Header /> */}
+              
                 <div className="nav">
                 <Menu
                     defaultSelectedKeys={['1']}
                     // defaultOpenKeys={['sub1']}
                     mode="inline"
-                    theme="dark"
+                    theme="light"
                     // inlineCollapsed={this.state.collapsed}
                 >   
                     <SubMenu
                         title={
                             <span>
-                                <Icon type="mail" />
+                               <Icon type="home" />
                                 <span >用户管理</span>
                             </span>
                         }
@@ -42,7 +44,7 @@ export default class Home extends Component {
                     <SubMenu
                         title={
                             <span>
-                                <Icon type="appstore" />
+                               <Icon type="team" />
                                 <span>小组管理</span>
                             </span>
                         }
@@ -62,6 +64,7 @@ export default class Home extends Component {
                     <RouterView routers={this.props.children}></RouterView>
                 </div>
             </div>
+         </div>
      
         )
     }

@@ -5,7 +5,7 @@ const headerStyle={
     height:44,
     display:'flex',
     justifyContent:'flex-end',
-    backgroundColor:'#00f'
+    backgroundColor:'#1890ff'
 
 }
 export default class Header extends Component {

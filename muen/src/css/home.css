@@ -4,16 +4,56 @@
   list-style: none;
 }
 
-.nav {
-  width: 20%;
-}
-
 .home {
   display: flex;
+  width: 100%;
+  height: 600px;
+}
+
+.nav {
+  width: 20%;
+  height: 100%;
+  border-right: 1px solid #eee;
 }
 
 .content {
   width: 80%;
-  height: 400px;
-  background: #ccc;
+  height: 600px;
+  padding: 20px;
+  background: #fefefe;
+}
+
+.content .conTop {
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.content .conTop .addmember {
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  background-color: green;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.conBotLeft p {
+  height: 50px;
+  background-color: #eee;
+  color: #333;
+  line-height: 30px;
+}
+
+.conBotLeft p span {
+  display: inline-block;
+  width: 80px;
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+  margin: 10px 10px;
+  border: 1px solid #ccc;
 }
