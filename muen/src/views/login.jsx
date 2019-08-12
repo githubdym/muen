@@ -1,6 +1,7 @@
 import React  from 'react'
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import axios from 'axios';
+import '../css/login.css'
 class NormalLoginForm extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
@@ -26,7 +27,7 @@ class NormalLoginForm extends React.Component {
             <Input
               prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
               placeholder="Username"
-              value='userName' onChange={(e)=>{
+              setfieldsvalue='userName' onChange={(e)=>{
                   this.setState({
                     userName:e.target.value
                   })
@@ -43,7 +44,7 @@ class NormalLoginForm extends React.Component {
               type="password"
               placeholder="Password"
 
-              value='password' onChange={(e)=>{
+              setfieldsvalue='password' onChange={(e)=>{
                 this.setState({
                     password:e.target.value
                 })
@@ -56,7 +57,8 @@ class NormalLoginForm extends React.Component {
             valuePropName: 'checked',
             initialValue: true,
           })(<Checkbox>Remember me</Checkbox>)}
-          <a className="login-form-forgot" href="">
+          <a className="login-form-forgot" href="#">
+            
             Forgot password
           </a>
           <Button type="primary" htmlType="submit" className="login-form-button"  onClick={()=>{
@@ -64,6 +66,10 @@ class NormalLoginForm extends React.Component {
                 console.log(res);
                 if (res.data.token) {
                     window.localStorage.setItem('token', res.data.token);
+                    if(res.data.code===1){
+                        this.props.history.push('/home')
+                    }
+                  
                   }
               })
 

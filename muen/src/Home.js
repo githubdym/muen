@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Menu, Icon} from 'antd';
 import RouterView from "./router/routerview"
 import "./css/home.css"
+import Header from './components/header'
 const { SubMenu } = Menu;
 export default class Home extends Component {
     state = {
@@ -15,6 +16,7 @@ export default class Home extends Component {
     render() {
         return (
             <div className="home">
+                {/* <Header /> */}
                 <div className="nav">
                 <Menu
                     defaultSelectedKeys={['1']}

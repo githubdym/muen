@@ -27,7 +27,13 @@ const Login = Loadable({
 function Loading() {
     return <div> loading ...</div>
 }
-const routers = [{
+const routers = [
+    {
+        path:'/',
+        redirect:'/register'
+    },
+    
+{
     path:'/register',
     component:Register
 },{
@@ -37,6 +43,10 @@ const routers = [{
     path: "/home",
     component: Home,
     children: [
+        {
+            path:'/home/',
+            redirect:'/home/userAll'
+        },
         {
             path: "/home/teamlist",
             component: TeamList

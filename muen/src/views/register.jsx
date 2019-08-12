@@ -58,7 +58,8 @@ import '../css/register.css'
       autoCompleteResult: [],
       userName:'',
       password:'',
-      realName:''
+      realName:'',
+      userType:3,
     };
   
     handleSubmit = e => {
@@ -102,7 +103,7 @@ import '../css/register.css'
       }
       this.setState({ autoCompleteResult });
     };
-  
+   
     render() {
       const { getFieldDecorator } = this.props.form;
       // const { autoCompleteResult } = this.state;
@@ -141,7 +142,7 @@ import '../css/register.css'
       // const websiteOptions = autoCompleteResult.map(website => (
       //   <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
       // ));
-        let {userName,password,realName}=this.state;
+        let {userName,password,realName,userType}=this.state;
       return (
         <Form {...formItemLayout} onSubmit={this.handleSubmit}>
 
@@ -210,6 +211,21 @@ import '../css/register.css'
             
             />)}
           </Form.Item>
+
+          <Form.Item label="用户权限">
+             <Select
+             setfieldsvalue={userType}
+             onChange={(e)=>{
+               console.log(e)
+               this.setState({
+                userType:e
+               })
+             }}
+           >
+             <Option value="2">组长</Option>
+             <Option value="3">普通</Option>
+           </Select>
+           </Form.Item>
           <Form.Item label="用户地址">
             {getFieldDecorator('residence', {
               initialValue: ['北京', '北京', '海淀区'],
@@ -256,7 +272,7 @@ import '../css/register.css'
     }
     componentDidUpdate(){
     
-        console.log(this.state.userName,this.state.password)
+        console.log(this.state.userName,this.state.password,this.state.userType)
       
     }
    
