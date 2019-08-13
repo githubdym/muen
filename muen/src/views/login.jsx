@@ -67,10 +67,10 @@ class NormalLoginForm extends React.Component {
             valuePropName: 'checked',
             initialValue: true,
           })(<Checkbox>Remember me</Checkbox>)}
-          <a className="login-form-forgot" href="#">
+          <span className="login-form-forgot" href="#">
             
             Forgot password
-          </a>
+          </span>
           <Button type="primary" htmlType="submit" className="login-form-button"  onClick={()=>{
               axios.post('/login',{userName,password} ).then(res=>{
                 console.log(res);
