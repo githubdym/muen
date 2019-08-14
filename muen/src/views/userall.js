@@ -93,14 +93,16 @@ const rowSelection = {
             onSearch={value => console.log(value)}
             style={{ width: 200 }}
           />
-          <span className='addmember'>+添加成员</span></div>
+          <span className='addmember' onClick={()=>{
+            this.showModal()
+          }} >+添加成员</span></div>
         <div className='conBot'>
           <div className='conBotLeft'>
             <h5>全部用户</h5>
             <p>  <span>全选</span> <span>删除</span> </p>
             <Table columns={columns} dataSource={userList}  rowSelection={rowSelection}  />
             <Modal
-          title="Modal"
+          title=""
           visible={this.state.visible}
           onOk={this.hideModal}
           onCancel={this.hideModal}
