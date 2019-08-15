@@ -1,0 +1,7 @@
+.ant-radio-group {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  border-radius: 20px;
+}
