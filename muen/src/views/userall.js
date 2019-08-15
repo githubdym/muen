@@ -4,6 +4,7 @@ import { Table, Divider } from 'antd';
 import { Modal } from 'antd';
 import { get } from '../request/index'
 import {Avatar} from "antd"
+import {connect} from "react-redux"
 const { Search } = Input;
 
 const rowSelection = {
@@ -137,11 +138,28 @@ const rowSelection = {
         })
         
       })
-     
+      this.props.get(newUserList)
       this.setState({
         userList: newUserList
       })
     })
   }
 }
-export default UserAll
+export default connect(
+  (state)=>{
+    return {
+      
+    }
+   
+  },
+  (dispatch)=>{
+      return {
+        get(newUserList){
+          dispatch({
+            type:"GET_LIST",
+            data:newUserList
+          })
+        }
+      }
+  }
+  )(UserAll)
