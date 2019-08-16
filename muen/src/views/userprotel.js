@@ -3,7 +3,8 @@ import { Radio } from 'antd';
 import {get } from '../request/index'
 import { Table, Divider, Tag } from 'antd';
 import '../css/team.css'
-export default class UserProtel extends Component {
+import {connect} from 'react-redux'
+class UserProtel extends Component {
     state={
         groupId:1003,
         groupNav:[],
@@ -44,24 +45,30 @@ export default class UserProtel extends Component {
               ),
             },
           ];
-      //  console.log(groupList,groupId);
+   
         return (
             <div>
                     <Radio.Group defaultValue="1003" buttonStyle="solid">
                             <Radio.Button value="1003"  onChange={(e)=>{
-                                      this.setState({groupId:e.target.value})
+                                  
+                                      this.props.saveID(e.target.value)
                             }}> 沐恩小组</Radio.Button>
                             <Radio.Button value="1004"  onChange={(e)=>{
-                                      this.setState({groupId:e.target.value})
+                                   
+                                      this.props.saveID(e.target.value)
+
                             }}>祷告小组</Radio.Button>
                             <Radio.Button value="1005"  onChange={(e)=>{
-                                      this.setState({groupId:e.target.value})
+                                    
+                                      this.props.saveID(e.target.value)
+
                             }}>查经小组</Radio.Button>
                             <Radio.Button value="1006"  onChange={(e)=>{
-                                      this.setState({groupId:e.target.value})
+                                      this.props.saveID(e.target.value)
                             }}>音乐小组</Radio.Button>
                     </Radio.Group>
                     <p>   <span>+ 添加成员</span> <span> 批量操作  </span></p>
+                 {this.props.teamMember}
                     {/* <Table columns={columns} dataSource={} /> */} <div>
                 </div>
             </div>
@@ -73,14 +80,20 @@ export default class UserProtel extends Component {
             groupNav:res.result
         })
       });
-      get(`/group/members?groupId=${this.state.groupId}`).then(res=>{
-        this.setState({
-         groupList:res.result
-       })
-    })
+    
+   
        
     }
-    componentDidUpdate(){
-     
-    }
+  
 }
+export default connect((state)=>{
+  return {
+        teamMember:state.getTeamId
+  }
+},(dispatch)=>{
+  return{
+      saveID(data){
+          dispatch({type:"getTeammember",data:data})
+      }
+  }
+})(UserProtel)
