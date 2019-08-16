@@ -252,7 +252,7 @@ import '../css/register.css'
             <Button type="primary" htmlType="submit"
             onClick={()=>{
                 let{ userName,password,realName}=this.state;
-                 axios.post('/register',{realName,userName,password,userType:3})
+                 axios.post('/register',{realName,userName,password,userType:1})
                    .then(res => {
                        if(res.data.code===1){
             
