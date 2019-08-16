@@ -1,21 +1,24 @@
 import {get } from '../../request/index'
 
-let getTeamId=function(state=[],action){
+export const getTeamId=function(state=[],action){
     switch(action.type){
         case 'getTeammember':
             let newState=JSON.parse(JSON.stringify(state));
-           get(`/group/members?groupId=${action.data}`).then(res=>{
-                newState=res.result;    
-            }); 
-            if(newState.length>0){
-                return newState;
-            }
-            console.log(newState);
-            return newState;
+            console.log(action.data)
+            newState.push(action.data)
+            return [...newState];
 
         default:
-            return state;
+            return [...state];
     } 
 
 }
-export default getTeamId
+
+export function getData(data){
+    return function(next){
+    
+    get(`/group/members?groupId=${data}`).then(res=>{
+            next({type:'getTeammember',data:res.result})
+        }); 
+    }
+}
