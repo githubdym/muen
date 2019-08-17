@@ -4,7 +4,7 @@ import {get } from '../request/index'
 import { Table, Divider } from 'antd';
 import '../css/team.css'
 import {connect} from 'react-redux'
-import {getData} from '../store/reducers/getTeamId'
+import {getData,getDefault} from '../store/reducers/getTeamId'
 class UserProtel extends Component {
     state={
         groupId:1003,
@@ -13,8 +13,7 @@ class UserProtel extends Component {
         teamMember:[],
     }
     render() {
-        // let  {groupId,groupList,groupNav}=this.state; 
-       console.log(this.state.teamMember);
+   
         const columns = [
             {
               title: '用户名',
@@ -81,26 +80,24 @@ class UserProtel extends Component {
         this.setState({
             groupNav:res.result
         })
-      });  
-    }
-    componentWillReceiveProps(nextProps) {
-      console.log(nextProps.teamMember[0],22222222);
-      this.setState({
-        teamMember: nextProps.teamMember[0]
       });
-     }
+      this.props.saveDefault(1003);  
+    }
+
 }
 export default connect((state)=>{
   return {
-        teamMember:state.getTeamId
+        teamMember:state.getTeamId,
+        teamDefaultMember:state.getTeamId
     }
   },
 (dispatch)=>{
   return{
       saveID(data){
-        console.log(data,111);
-        dispatch(getData(data))
-        
+        dispatch(getData(data))       
+      },
+      saveDefault(data){
+        dispatch(getDefault(data))   
       }
   }
 })(UserProtel)
