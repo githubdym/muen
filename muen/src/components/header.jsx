@@ -16,7 +16,9 @@ export default class Header extends Component {
             <div style={headerStyle}>
                 <img src="" alt=""/>
                 <p>
-                    <button> 退出 </button>
+                    <button onClick={()=>{
+                        window.localStorage.removeItem('token');
+                    }}> 退出 </button>
                     <span>修改密码</span>
                 </p>
             </div>

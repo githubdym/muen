@@ -46,7 +46,7 @@ export default class TeamList extends Component {
                            }
                        } />
                        <Icon type="delete" theme="filled" style={{fontSize: 24,color:'red'}}
-                       className='icon' onClick={this.delTeam.bind(this)}/>
+                       className='icon' onClick={this.delTeam.bind(this,item.groupId)}/>
                     </div>
                     )
                 }
@@ -114,6 +114,7 @@ export default class TeamList extends Component {
     delTeam(id){
     
         post(' /group/delete',{groupId:id}).then(res=>{
+            console.log(res);
             if(res.code===1){
                 this.getGroup();  
             }else{
