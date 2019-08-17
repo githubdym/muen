@@ -1,16 +1,19 @@
 import React, { Component } from 'react'
 import { Radio } from 'antd';
 import {get } from '../request/index'
-import { Table, Divider, Tag } from 'antd';
+import { Table, Divider } from 'antd';
 import '../css/team.css'
-export default class UserProtel extends Component {
+import {connect} from 'react-redux'
+import {getData,getDefault} from '../store/reducers/getTeamId'
+class UserProtel extends Component {
     state={
         groupId:1003,
         groupNav:[],
-        groupList:[]
+        groupList:[],
+        teamMember:[],
     }
     render() {
-        let  {groupId,groupList,groupNav}=this.state; 
+   
         const columns = [
             {
               title: '用户名',
@@ -35,7 +38,7 @@ export default class UserProtel extends Component {
             {
               title: '操作',
               key: 'action',
-              render: (text, record) => (
+              render: () => (
                 <span>
                   <span>编辑</span>
                   <Divider type="vertical" />
@@ -44,25 +47,30 @@ export default class UserProtel extends Component {
               ),
             },
           ];
-      //  console.log(groupList,groupId);
+   
         return (
             <div>
                     <Radio.Group defaultValue="1003" buttonStyle="solid">
                             <Radio.Button value="1003"  onChange={(e)=>{
-                                      this.setState({groupId:e.target.value})
+                                      this.props.saveID(e.target.value*1)
                             }}> 沐恩小组</Radio.Button>
                             <Radio.Button value="1004"  onChange={(e)=>{
-                                      this.setState({groupId:e.target.value})
+                                   
+                                      this.props.saveID(e.target.value*1)
+
                             }}>祷告小组</Radio.Button>
                             <Radio.Button value="1005"  onChange={(e)=>{
-                                      this.setState({groupId:e.target.value})
+                                    
+                                      this.props.saveID(e.target.value*1)
+
                             }}>查经小组</Radio.Button>
                             <Radio.Button value="1006"  onChange={(e)=>{
-                                      this.setState({groupId:e.target.value})
+                                      this.props.saveID(e.target.value*1)
                             }}>音乐小组</Radio.Button>
                     </Radio.Group>
                     <p>   <span>+ 添加成员</span> <span> 批量操作  </span></p>
-                    {/* <Table columns={columns} dataSource={} /> */} <div>
+            
+                    <Table columns={columns} dataSource={this.props.teamMember[0]&&this.props.teamMember[0]} /> <div>
                 </div>
             </div>
         )
@@ -73,14 +81,23 @@ export default class UserProtel extends Component {
             groupNav:res.result
         })
       });
-      get(`/group/members?groupId=${this.state.groupId}`).then(res=>{
-        this.setState({
-         groupList:res.result
-       })
-    })
-       
+      this.props.saveDefault(1003);  
     }
-    componentDidUpdate(){
-     
-    }
+
 }
+export default connect((state)=>{
+  return {
+        teamMember:state.getTeamId,
+        teamDefaultMember:state.getTeamId
+    }
+  },
+(dispatch)=>{
+  return{
+      saveID(data){
+        dispatch(getData(data))       
+      },
+      saveDefault(data){
+        dispatch(getDefault(data))   
+      }
+  }
+})(UserProtel)
