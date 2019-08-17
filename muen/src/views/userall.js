@@ -19,7 +19,7 @@ class UserAll extends Component {
   state = {
     visible: false,
     userName: "",
-    passWord: "",
+    password: "",
     realName: "",
     userType: "",
     phoneNum: "",
@@ -43,6 +43,8 @@ class UserAll extends Component {
   };
   submit = () => {
     let { type, record } = this.state
+    let {realName,userName,password,userType} =this.state
+    console.log(type)
     switch (type) {
       case "REPLACE":
       this.hideModal()
@@ -73,7 +75,22 @@ class UserAll extends Component {
     
       break;
       case "ADD":
-      alert(1111)
+      post('/register',{realName,userName,password,userType})
+      .then(res => {
+          if(res.code===1){
+            this.props.add({
+              key: record.key,
+              userId: record.key,
+              address: this.state.address,
+              userName: this.state.userName,
+              realName: this.state.realName,
+              password: this.state.password,
+              phoneNum: this.state.phoneNum,
+              userType: this.state.userType,
+              userIcon: "http://img.sj33.cn/uploads/allimg/201611/7-1611010T648.jpg"
+            })
+          }
+      });
       this.hideModal()
   
     }
@@ -81,6 +98,7 @@ class UserAll extends Component {
   };
   render() {
     let { list } = this.props;
+    console.log(this.state.type)
     const columns = [
       {
         title: '用户头像',
@@ -146,16 +164,22 @@ class UserAll extends Component {
         <div className='conTop'>
           <Search
             placeholder="用户昵称/姓名、电话"
-            onSearch={value => console.log(value)}
+            onSearch={value =>{
+              get(`/user/search?input=${value}`).then(res=>{
+                if(res.code===1){
+                  this.props.changeList(res.result)
+                }
+              })
+            }}
             style={{ width: 200 }}
           />
           <span className='addmember' onClick={() => {
             this.setState({
-              type:"ADD"
+              type:1
             })
-            this.showModal()
-              this.submit("ADD")
-
+           
+              this.showModal("record","ADD")
+            this.submit()
           }} >+添加成员</span></div>
         <div className='conBot'>
           <div className='conBotLeft'>
@@ -172,7 +196,7 @@ class UserAll extends Component {
             >
               <p><label>用户名：</label><input value={this.state.userName} onChange={(e) => { this.setState({ userName: e.target.value }) }}></input></p>
               <p><label>姓名：</label><input value={this.state.realName} onChange={(e) => { this.setState({ realName: e.target.value }) }}></input></p>
-              <p><label>密码：</label><input value={this.state.passWord} onChange={(e) => { this.setState({ passWord: e.target.value }) }}></input></p>
+              <p><label>密码：</label><input value={this.state.password} onChange={(e) => { this.setState({ password: e.target.value }) }}></input></p>
               <p><label>权限：</label><input value={this.state.userType} onChange={(e) => { this.setState({ userType: e.target.value }) }}></input></p>
               <p><label>电话：</label><input value={this.state.phoneNum} onChange={(e) => { this.setState({ phoneNum: e.target.value }) }}></input></p>
               <p><label>地址：</label><input value={this.state.address} onChange={(e) => { this.setState({ address: e.target.value }) }}></input></p>
@@ -229,6 +253,18 @@ export default connect(
         dispatch({
           type: "REPLACE",
           data: obj
+        })
+      },
+      add(obj){
+        dispatch({
+          type:"ADD",
+          data:obj
+        })
+      },
+      changeList(obj){
+        dispatch({
+          type:"CHANGE_LIST",
+          data:obj
         })
       }
     }
