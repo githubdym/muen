@@ -15,6 +15,15 @@ let userAll=function(state=[],action){
         RelState.splice(Relindex,1,action.data)
         console.log(RelState)
         return RelState
+        case "ADD":
+        let AddState=JSON.parse(JSON.stringify(state));
+        AddState.push(action.data)
+        return AddState
+        case "CHANGE_LIST":
+        let ChangeList=JSON.parse(JSON.stringify(state));
+        ChangeList.length=0;
+        ChangeList=action.data
+        return ChangeList
         default :
         return state
     }
